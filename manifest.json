@@ -1,16 +1,20 @@
 {
-	"name": "Learn and Earn",
-	"version": "1.0",
-	"manifest_version": 2,
-	"content_scripts": [
-		{
-			"matches": ["https://*.khanacademy.org/*", "http://*.khanacademy.org/*"],
-			"js": ["jquery-3.5.1.min.js", "content.js"]
-		}
-	],
-	"icons": {
-		"16": "imgs/icon16.png",
-		"48": "imgs/icon48.png",
-		"128": "imgs/icon128.png"
-	}
+  "name": "Learn And Earn",
+  "version": "1.0",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "imgs/icon16.png",
+    "default_popup": "popup.html",
+    "default_title": "Learn And Earn"
+  },
+  "permissions": [
+    "tabs",
+    "\u003Call_urls\u003E",
+    "cookies",
+    "contextMenus",
+    "unlimitedStorage",
+    "notifications",
+    "storage",
+    "clipboardWrite"
+  ]
 }
