@@ -7,6 +7,12 @@
     "default_popup": "popup.html",
     "default_title": "Learn And Earn"
   },
+  "content_scripts": [
+    {
+      "matches": ["https://www.khanacademy.org/*"],
+      "js": ["js/jquery-3.5.1.min.js", "js/content.js"]
+    }
+  ],
   "permissions": [
     "tabs",
     "\u003Call_urls\u003E",

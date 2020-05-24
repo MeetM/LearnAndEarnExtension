@@ -1,41 +1,87 @@
-$(function() {
-	var link = $("._eil8noz a[href$='/donate']");
-    link.text("Learn and Earn");
-	setInterval(function(){
-		link.attr("href", "http://localhost:5000"); 
- 	}, 1000);
-    
-    var button = link.parent();
-    button.css('background-color', '#4CAF50');
-    button.css('color', '#ffffff');
-    button.css('border-color', '#4CAF50');
-    button.css('padding', '7px');
-    button.hover(function() {
-    	button.css('color', '#ffffff');
-    });
+$(function () {
+  function changeSubmitTestButton() {
+    if ($("._1alfwn7n").text().includes("Done")) {
+      // $("._1alfwn7n").text("Submit to Learn and Earn");
+      $("._1alfwn7n").text("");
+      $("._1alfwn7n").append(
+        '<a herf="http://localhost:3000/loggedin">Submit to Learn and Earn</a>'
+      );
 
+      $("._1alfwn7n").click(function (event) {
+        event.preventDefault();
+        openLoggedIn();
+      });
+      $("._1alfwn7n")
+        .parent()
+        .click(function (event) {
+          event.preventDefault();
+          openLoggedIn();
+        });
+    }
+  }
+  function openLoggedIn() {
+    var win = window.open("http://localhost:3000/loggedin", "_blank");
+    if (win) {
+      //Browser has allowed it to be opened
+      win.focus();
+    } else {
+      //Browser has blocked it
+      alert("Please allow popups for this website");
+    }
+  }
 
+  function changeLNRLink() {
+    if (timer) {
+      clearInterval(timer);
+    }
+    // console.log(location.href);
+    var timer = setInterval(function () {
+      var params = window.location.href.split("/");
+      console.log("params ", params);
+      if (params[4]) {
+        var topic = params[3];
+        var course = params[4];
+        var link = $("._eil8noz a[href$='/donate']");
+        link.text("$ Learn and Earn");
+        // var newUrl =
+        //   "http://localhost:3000?topic=" + topic + "&course=" + course;
+        var newUrl =
+          "http://localhost:3000/loggedin?topic=" + topic + "&course=" + course;
+        link.attr("href", newUrl);
 
- //    function getCookies(domain, name, callback) {
-	//     chrome.cookies.get({"url": domain, "name": name}, function(cookie) {
-	//         if(callback) {
-	//             callback(cookie.value);
-	//         }
-	//     });
-	// }
+        link.click(function (event) {
+          event.preventDefault();
+          window.open(newUrl, "_blank");
+        });
+      }
+    }, 2000);
+  }
 
-	//usage:
-	chrome.extension.sendRequest("getStorageData", function(response) {
-	    console.log("response:", response);
-	}
+  changeLNRLink();
+  setInterval(changeSubmitTestButton, 2000);
 
+  function hackForOnUrlChange(callback) {
+    var oldHref = document.location.href;
+
+    window.onload = function () {
+      var bodyList = document.querySelector("body"),
+        observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            if (oldHref != document.location.href) {
+              oldHref = document.location.href;
+              callback();
+            }
+          });
+        });
+
+      var config = {
+        childList: true,
+        subtree: true,
+      };
+
+      observer.observe(bodyList, config);
+    };
+  }
+
+  hackForOnUrlChange(changeLNRLink);
 });
-
-
-function getCookies(domain, name, callback) {
-    chrome.cookies.get({"url": domain, "name": name}, function(cookie) {
-        if(callback) {
-            callback(cookie.value);
-        }
-    });
-}
