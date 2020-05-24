@@ -4,7 +4,7 @@ $(function () {
       // $("._1alfwn7n").text("Submit to Learn and Earn");
       $("._1alfwn7n").text("");
       $("._1alfwn7n").append(
-        '<a herf="http://localhost:3000/loggedin">Submit to Learn and Earn</a>'
+        '<a herf="https://iiptw.csb.app/loggedin">Submit to Learn and Earn</a>'
       );
 
       $("._1alfwn7n").click(function (event) {
@@ -20,7 +20,7 @@ $(function () {
     }
   }
   function openLoggedIn() {
-    var win = window.open("http://localhost:3000/loggedin", "_blank");
+    var win = window.open("https://iiptw.csb.app/loggedin", "_blank");
     if (win) {
       //Browser has allowed it to be opened
       win.focus();
@@ -46,7 +46,7 @@ $(function () {
         // var newUrl =
         //   "http://localhost:3000?topic=" + topic + "&course=" + course;
         var newUrl =
-          "http://localhost:3000/loggedin?topic=" + topic + "&course=" + course;
+          "https://iiptw.csb.app/login?topic=" + topic + "&course=" + course;
         link.attr("href", newUrl);
 
         link.click(function (event) {

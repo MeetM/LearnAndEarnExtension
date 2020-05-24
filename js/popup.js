@@ -1,4 +1,4 @@
-var LNR_DOMAIN = "http://localhost:3000";
+var LNR_DOMAIN = "https://iiptw.csb.app/";
 // var LNR_DOMAIN = "https://www.khanacademy.org/";
 
 var TEN_DAYS_IN_SECONDS = 864000;
